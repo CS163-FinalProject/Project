@@ -32,6 +32,10 @@ class Trie{
 
         void build(string key, unordered_map<string,int> data);
 
+        void save(string filename);
+
+        void load(string filename);
+
         bool isEmpty();
 
         void trieTranverse();

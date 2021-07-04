@@ -22,6 +22,18 @@ int get_index(char key){
     return -1;
 }
 
+string get_dir(string folder, string filename){
+    return folder + "\\" + filename + ".txt"; 
+}
+
+int string_to_int(string str){
+    int ans = 0;
+    for(int i = 0; i < str.length(); i++){
+        ans = ans*10 +(str[i] - '0');
+    }
+    return ans;
+}
+
 vector<pair<string,int>> to_vector(unordered_map<string, int> map){
     vector<pair<string,int>> ret;
 
