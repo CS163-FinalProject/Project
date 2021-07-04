@@ -1,5 +1,11 @@
 #include"Tool.h"
 
+#include<iostream>
+#include<unordered_map>
+#include<vector>
+
+using namespace std;
+
 int get_index(char key){
     if('0' <= key && key <= '9'){
         return key - '0';
@@ -14,4 +20,13 @@ int get_index(char key){
     }
 
     return -1;
+}
+
+vector<pair<string,int>> to_vector(unordered_map<string, int> map){
+    vector<pair<string,int>> ret;
+
+    for(auto it : map){
+        ret.push_back(it);
+    }
+    return ret;
 }

@@ -26,8 +26,21 @@ void Trie::build(string filename, unordered_map<string,int> data){
             if(!root->child[tmp]) roottmp->child[tmp] = new TrieNode;
             roottmp = roottmp->child[tmp];
         }
-
+        roottmp->data[filename] += it->second;
     }
 
     if(!this->root) this->root = root;
+}
+
+vector<pair<string,int>> Trie::search(string keyword){
+    if(!root){
+        return vector<pair<string,int>>(); //null
+    }
+    TrieNode* roottmp = root;
+    for(int i = 0; i < keyword.length(); i++){
+        if(!roottmp) return vector<pair<string,int>>();
+        roottmp = roottmp->child[get_index(keyword[i])];
+    }
+
+    return to_vector(roottmp->data);
 }
