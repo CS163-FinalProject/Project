@@ -8,28 +8,27 @@
 
 using namespace std;
 
-class TrieNode{
-    public:
+struct TrieNode{
         TrieNode* child[42]; //0-9: number, 10-35: character, 36: ' ', 37: '.', 38 '$' , 39 '%', 40 '#', 41 '-'
-        bool isLeaf, isTitle;
+        bool isLeaf = false, isTitle;
         vector<int> order;
 };
 
-class Store{
-    public:
+struct Store{
         string filename;
         vector<int> pos;
         int point;
 };
 
-class Trie{
-    public:
-        TrieNode* getNode();
-
-        void insert(TrieNode* root, string key, int place, bool title);
-
-        TrieNode* search(TrieNode* root, string key, bool title);
+struct Trie{
+        TrieNode* root = nullptr;
 };
+
+TrieNode* getNode();
+
+void insert(TrieNode* root, string key, int place, bool title);
+
+TrieNode* searchTrie(TrieNode* root, string key, bool title);
 
 
 

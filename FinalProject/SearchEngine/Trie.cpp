@@ -11,30 +11,35 @@
 
 using namespace std;
 
-TrieNode* Trie::getNode(){
-    TrieNode* root = new TrieNode;
-    if(root){
+TrieNode* getNode(){
+    TrieNode* root = nullptr;
+    if(!root){
+        root = new TrieNode;
         root->isLeaf = false;
         root->isTitle = false;
         for(int i = 0; i < 42; i++) root->child[i] = nullptr;
     }
+    
     return root;
 }
 
-void Trie::insert(TrieNode* root, string key, int place, bool title){
+void insert(TrieNode* root, string key, int place, bool title){
     TrieNode* cur = root;
     int id;
     for(int i = 0; i < key.length(); ++i){
         id = get_index(key[i]);
+        
+        cout << key[i] << " " << id;
+        cout << endl;
         if(id == -1) continue;
-        if(!cur->child[id]) cur->child[id] = new TrieNode;
+        if(!cur->child[id]) cur->child[id] = getNode();
         cur = cur->child[id];
     }
 
     cur->isLeaf = true;
 }
 
-TrieNode* Trie::search(TrieNode* root, string key, bool title){
+TrieNode* searchTrie(TrieNode* root, string key, bool title){
     TrieNode* cur = root;
     int id;
     for(int i = 0; i < key.length(); i++){

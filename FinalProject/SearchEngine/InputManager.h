@@ -9,8 +9,13 @@
 #include<iostream>
 
 
+vector<string> SenFilter(string sen);
+
 void InputFile(string filename, unordered_map<string, Trie>& data);
+
 void InputListFile(string filename, unordered_map<string, Trie> &data);
+
+void OuputResult(string key, unordered_map<string, Trie> data);
     
 
 #endif

@@ -18,6 +18,9 @@ int main(){
 
     //Trie tree;
     //tree.getNode();
-    
-
+    string filename = "0.txt";
+    cout << "Please input a key";
+    string key = "";
+    getline(cin, key);
+    OuputResult(key, data);
 }
