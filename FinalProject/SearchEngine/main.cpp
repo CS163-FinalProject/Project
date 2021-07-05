@@ -15,18 +15,17 @@ using namespace std;
 
 int main(){
     clock_t begin, end;
-
+    cout << "Building..." << endl;
     begin = clock();
     unordered_map<string,Trie> data;
     InputListFile("dataset\\___index.txt", data);
     end = clock();
 
-    cout << "Build Time: " << (end - begin) / CLOCKS_PER_SEC << endl;
+    cout << "Completed in " << (end - begin) / CLOCKS_PER_SEC << " s." << endl;
 
-    //Trie tree;
-    //tree.getNode();
-    string filename = "0.txt";
-    cout << "Please input a key" << endl;
+   
+    cout << "------------------------------------------------------------------" << endl;
+    cout << "Please input a key to find: ";
     string key = "";
     getline(cin, key);
     OuputResult(key, data);

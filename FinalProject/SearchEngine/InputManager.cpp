@@ -69,9 +69,15 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 }
 
 void OuputResult(string key, unordered_map<string, Trie> data) {
+    int n = 1;
+    cout << "Top 5 results: \n" << endl;
     for (auto it : data) {
         if (searchTrie(it.second.root, key, false)) {
-            cout << it.first << endl;
+            cout << "[" << n << "] " <<  it.first << endl;
+            n++;
+            if (n == 6)
+                break;
+            
         }
     }
 }
