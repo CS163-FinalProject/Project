@@ -48,14 +48,18 @@ void InputFile(string filename, unordered_map<string, Trie>& data){
 void InputListFile(string filename, unordered_map<string, Trie> &data){
     ifstream fin;
     fin.open(filename);
+
     
+
     string line;
+    int n = 0;
     if(fin.is_open()){
-        
+        while (n < 701) {
             getline(fin, line);
             //cout << "YES";
             InputFile(line, data);
-        
+            n++;
+        }
     }
     else {
         cout << "Cant open file";

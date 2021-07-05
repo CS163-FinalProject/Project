@@ -29,8 +29,8 @@ void insert(TrieNode* root, string key, int place, bool title){
     for(int i = 0; i < key.length(); ++i){
         id = get_index(key[i]);
         
-        cout << key[i] << " " << id;
-        cout << endl;
+        //cout << key[i] << " " << id;
+        //cout << endl;
         if(id == -1) continue;
         if(!cur->child[id]) cur->child[id] = getNode();
         cur = cur->child[id];
