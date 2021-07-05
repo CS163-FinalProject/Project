@@ -54,7 +54,7 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
     string line;
     int n = 0;
     if(fin.is_open()){
-        while (n < 701) {
+        while (n < 1001) {
             getline(fin, line);
             //cout << "YES";
             InputFile(line, data);
