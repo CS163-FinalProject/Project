@@ -10,36 +10,26 @@ using namespace std;
 
 class TrieNode{
     public:
-        unordered_map<string,int> data;
-        //first: file name; second: frequency
+        TrieNode* child[42]; //0-9: number, 10-35: character, 36: ' ', 37: '.', 38 '$' , 39 '%', 40 '#', 41 '-'
+        bool isLeaf, isTitle;
+        vector<int> order;
+        
+};
 
-        TrieNode* child[38];
-        //26 aplhabet + 10 number + $ + #
-        //every node has 38 children
-
-        bool isExist = false;
-
-        void trieTranverse(TrieNode* head);
+class Store{
+    public:
+        string filename;
+        vector<int> pos;
+        int point;
 };
 
 class Trie{
-    private:
-        TrieNode* root = nullptr;
     public:
-        vector<pair<string, int>> search(string keyword);
-        //search anf rank based on keywords
-        //first: filename , second// frequency
+        TrieNode* getNode();
 
-        void build(string key, unordered_map<string,int> data);
+        void insert(TrieNode* root, string key, int place, bool title);
 
-        void save(string filename);
-
-        void load(string filename);
-
-        bool isEmpty();
-
-        void trieTranverse();
-
+        TrieNode* search(TrieNode* root, string key, bool title);
 };
 
 
