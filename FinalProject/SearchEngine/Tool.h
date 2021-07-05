@@ -2,6 +2,8 @@
 #define _TOOL_
 
 #include<iostream>
+#include<vector>
+#include<unordered_map>
 using namespace std;
 
 int get_index(char key);

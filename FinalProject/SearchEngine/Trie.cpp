@@ -16,7 +16,7 @@ TrieNode* Trie::getNode(){
     if(root){
         root->isLeaf = false;
         root->isTitle = false;
-        for(int i = 0; i < 42; i++) root->child[i] = false;
+        for(int i = 0; i < 42; i++) root->child[i] = nullptr;
     }
     return root;
 }

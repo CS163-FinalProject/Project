@@ -13,7 +13,6 @@ class TrieNode{
         TrieNode* child[42]; //0-9: number, 10-35: character, 36: ' ', 37: '.', 38 '$' , 39 '%', 40 '#', 41 '-'
         bool isLeaf, isTitle;
         vector<int> order;
-        
 };
 
 class Store{
@@ -31,6 +30,9 @@ class Trie{
 
         TrieNode* search(TrieNode* root, string key, bool title);
 };
+
+
+
 
 
 #endif
