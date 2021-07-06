@@ -30,6 +30,7 @@ void InputFile(string filename, unordered_map<string, Trie>& data){
     ifstream in;
     in.open("dataset\\" + filename);
     string sen;
+    int place = 1;
     if(in.is_open()){
         while(!in.eof()){
             getline(in ,sen);
@@ -37,7 +38,8 @@ void InputFile(string filename, unordered_map<string, Trie>& data){
             if(!data[filename].root) data[filename].root = getNode();
             for (int i = 0; i < v.size(); i++) {
                 //cout << v[i];
-                insert(data[filename].root, v[i], 0, false);
+                insert(data[filename].root, v[i], place, false);
+                ++place;
             }
                
         }
@@ -54,7 +56,6 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
     if(fin.is_open()){
         while (n < 1001) {
             getline(fin, line);
-            //cout << "YES";
             InputFile(line, data);
             n++;
         }
@@ -76,7 +77,7 @@ void OuputResult(string key, unordered_map<string, Trie> data) {
         }
     }
     cout << "Top 5 results: \n" << endl;
-    while (n != 6) {
+    if(!pq.empty()) while (n != 6) {
         cout << "[" << n << "] " << pq.top().first << endl;
         pq.pop();
         n++;

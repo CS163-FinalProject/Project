@@ -37,6 +37,7 @@ void insert(TrieNode* root, string key, int place, bool title){
     }
 
     cur->isLeaf = true;
+    cur->order.push_back(place);
 }
 
 TrieNode* searchWord(TrieNode* root, string key, bool title){
