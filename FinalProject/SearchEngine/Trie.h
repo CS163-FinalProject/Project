@@ -28,7 +28,7 @@ TrieNode* getNode();
 
 void insert(TrieNode* root, string key, int place, bool title);
 
-TrieNode* searchTrie(TrieNode* root, string key, bool title);
+TrieNode* searchWord(TrieNode* root, string key, bool title);
 
 
 

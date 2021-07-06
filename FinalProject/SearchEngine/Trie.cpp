@@ -39,7 +39,7 @@ void insert(TrieNode* root, string key, int place, bool title){
     cur->isLeaf = true;
 }
 
-TrieNode* searchTrie(TrieNode* root, string key, bool title){
+TrieNode* searchWord(TrieNode* root, string key, bool title){
     TrieNode* cur = root;
     int id;
     for(int i = 0; i < key.length(); i++){

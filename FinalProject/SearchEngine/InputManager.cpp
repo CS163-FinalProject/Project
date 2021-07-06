@@ -32,7 +32,6 @@ void InputFile(string filename, unordered_map<string, Trie>& data){
     if(in.is_open()){
         while(!in.eof()){
             getline(in ,sen);
-            //cout << sen << endl;
             vector<string> v = SenFilter(sen);
             if(!data[filename].root) data[filename].root = getNode();
             for (int i = 0; i < v.size(); i++) {
@@ -72,7 +71,7 @@ void OuputResult(string key, unordered_map<string, Trie> data) {
     int n = 1;
     cout << "Top 5 results: \n" << endl;
     for (auto it : data) {
-        if (searchTrie(it.second.root, key, false)) {
+        if (searchWord(it.second.root, key, false)) {
             cout << "[" << n << "] " <<  it.first << endl;
             n++;
             if (n == 6)
