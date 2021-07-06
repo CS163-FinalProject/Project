@@ -141,11 +141,13 @@
   <ItemGroup>
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="QueryHandling.cpp" />
     <ClCompile Include="Tool.cpp" />
     <ClCompile Include="Trie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="QueryHandling.h" />
     <ClInclude Include="Tool.h" />
     <ClInclude Include="Trie.h" />
   </ItemGroup>

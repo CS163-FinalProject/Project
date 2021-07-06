@@ -54,3 +54,11 @@ TrieNode* searchWord(TrieNode* root, string key, bool title){
     }
     return nullptr;
 }
+
+void deleteTrie(TrieNode*& root) {
+    if (!root) return;
+    for (int i = 0; i < 42; i++) {
+        deleteTrie(root->child[i]);
+    }
+    delete root;
+}

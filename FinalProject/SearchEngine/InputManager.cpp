@@ -9,6 +9,7 @@
 #include<iostream>
 #include<algorithm>
 #include<sstream>
+#include<queue>
 
 vector<string> SenFilter(string sen) {
     vector<string> v;
@@ -48,8 +49,6 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
     ifstream fin;
     fin.open(filename);
 
-    
-
     string line;
     int n = 0;
     if(fin.is_open()){
@@ -69,14 +68,23 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 
 void OuputResult(string key, unordered_map<string, Trie> data) {
     int n = 1;
-    cout << "Top 5 results: \n" << endl;
+    priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> pq;
+    
     for (auto it : data) {
         if (searchWord(it.second.root, key, false)) {
-            cout << "[" << n << "] " <<  it.first << endl;
-            n++;
-            if (n == 6)
-                break;
-            
+            pq.push(it);
         }
+    }
+    cout << "Top 5 results: \n" << endl;
+    while (n != 6) {
+        cout << "[" << n << "] " << pq.top().first << endl;
+        pq.pop();
+        n++;
+    }
+}
+
+void destructor(unordered_map<string, Trie>& data) {
+    for (auto it : data) {
+        deleteTrie(it.second.root);
     }
 }

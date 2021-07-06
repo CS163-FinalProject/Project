@@ -22,6 +22,7 @@ struct Store{
 
 struct Trie{
         TrieNode* root = nullptr;
+        int score = 0;
 };
 
 TrieNode* getNode();
@@ -29,6 +30,8 @@ TrieNode* getNode();
 void insert(TrieNode* root, string key, int place, bool title);
 
 TrieNode* searchWord(TrieNode* root, string key, bool title);
+
+void deleteTrie(TrieNode*& root);
 
 
 

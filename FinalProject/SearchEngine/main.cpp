@@ -20,7 +20,7 @@ int main(){
     unordered_map<string,Trie> data;
     InputListFile("dataset\\___index.txt", data);
     end = clock();
-
+    data["053.txt"].score = 1;
     cout << "Completed in " << (end - begin) / CLOCKS_PER_SEC << " s." << endl;
 
    
@@ -29,4 +29,6 @@ int main(){
     string key = "";
     getline(cin, key);
     OuputResult(key, data);
+
+    destructor(data);
 }

@@ -27,6 +27,9 @@
     <ClCompile Include="Tool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="QueryHandling.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputManager.h">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="Trie.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QueryHandling.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
