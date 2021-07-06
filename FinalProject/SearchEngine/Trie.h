@@ -33,6 +33,9 @@ TrieNode* searchWord(TrieNode* root, string key, bool title);
 
 void deleteTrie(TrieNode*& root);
 
+vector<int> searchWordpos(TrieNode* root, string key);
+
+
 
 
 

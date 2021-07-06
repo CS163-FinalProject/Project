@@ -63,3 +63,18 @@ void deleteTrie(TrieNode*& root) {
     }
     delete root;
 }
+
+vector<int> searchWordpos(TrieNode* root, string key) {
+    TrieNode* cur = root;
+    int id;
+    for (int i = 0; i < key.length(); i++) {
+        id = get_index(key[i]);
+        if (id == -1) continue;
+        if (!cur->child[id]) return vector<int>();
+        cur = cur->child[id];
+    }
+    if (cur) {
+        if (cur->isLeaf) return cur->order;
+    }
+    return vector<int>();
+}

@@ -30,7 +30,11 @@ int main(){
     cout << "Please input a key to find: ";
     string key = "";
     getline(cin, key);
-    OuputResult(key, data);
 
+    vector<int> v;
+    v = searchWordpos(data["000.txt"].root, "our");
+    //OuputResult(key, data);
+    for (int i = 0; i < v.size(); i++)
+        cout << v[i] << " ";
     destructor(data);
 }
