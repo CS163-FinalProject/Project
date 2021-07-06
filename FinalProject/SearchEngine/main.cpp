@@ -20,7 +20,8 @@ int main(){
     unordered_map<string,Trie> data;
     InputListFile("dataset\\___index.txt", data);
     end = clock();
-    data["053.txt"].score = 1;
+    data["053.txt"].score = 2;
+    data["Data8.txt"].score = 1;
     cout << "Completed in " << (end - begin) / CLOCKS_PER_SEC << " s." << endl;
 
    
