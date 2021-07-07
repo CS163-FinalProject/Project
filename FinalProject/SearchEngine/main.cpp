@@ -63,8 +63,12 @@ int main(){
             break;
         }
 
+
     }
     cout << "Thank you for using!!!" << endl;
+
+    
+
 
     destructor(data);
     //destructor(imap);

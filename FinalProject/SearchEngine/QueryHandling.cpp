@@ -18,13 +18,16 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 	string tmp;
 	
 	while (ss >> tmp) {
-		string get; get = tmp.substr(0, 8);
+		string get = tmp.substr(0, 8);
 		if (tmp == "AND") {// AND
 			continue;
 		}
 		else if (tmp == "OR" || tmp == "END!") {// OR
 			orOperator(data, imap, omap);
+
 			if (tmp == "END!") {
+				orOperator(data, imap, omap);
+
 				imap.clear();
 				imap = omap;
 			}
@@ -38,8 +41,12 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		}
 		else if (tmp[0] == '-') { //exclude "-"
 			string key = tmp.substr(1);
-
 			minus_Search(imap, key);
+		}
+		else if (tmp.substr(0, 9) == "filetype:") {
+			string key = tmp.substr(9);
+			intitle_filetype_Operator(data, omap, key);
+			break;
 		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
@@ -62,7 +69,8 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 }
 
 
-void intitle_filetype_Search(unordered_map<string, Trie> & data, unordered_map<string, Trie> & map1, string key) {
+
+void intitle_filetype_Operator(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key) {
 	for (auto itr : data) {
 		string title = itr.first;
 		if (title.find(key) != string::npos) {
