@@ -74,11 +74,11 @@ void OuputResult(unordered_map<string, Trie> data) {
     for (auto it : data) {
         pq.push(it);
     }
-    cout << "Top 5 results: \n" << endl;
+    cout << "All results: \n" << endl;
     while (!pq.empty() /*&& n != 6*/) {
         cout << "[" << n << "] " << pq.top().first << endl;
         pq.pop();
-        //n++;
+        n++;
     }
 }
 

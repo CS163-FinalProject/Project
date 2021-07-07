@@ -29,38 +29,42 @@ int main(){
 
    
     cout << "------------------------------------------------------------------" << endl;
-    cout << "Please input a key to find: ";
-    string query = "";
-    getline(cin, query);
-    
+    cout << " Welcome to our SUPER Search Engine " << endl;
+    while (true) {
+        
+        int choice;
 
+        cout << "Continue to search? if (yes) press 1 (no) press 0" << endl;
 
-    /*vector<int> v;
-    v = searchWordpos(data["000.txt"].root, "our");
-    //OuputResult(key, data);
-    for (int i = 0; i < v.size(); i++)
-        cout << v[i] << " ";*/
+        cout << "You choose: "; cin >> choice; cin.ignore();
+        cout << "------------------------------------------------------------------" << endl;
+        if (choice == 1) {
+            cout << "Queries:" << endl;
+            cout << "[1] _ AND _ (FINISHED)" << endl;
+            cout << "[2] _ OR _ (FINISHED)" << endl;
+            cout << "[3] intitle: _ to the end. (FINISHED)" << endl;
+            cout << "[4] (exclude) -_ (FINISHED)" << endl;
+            cout << "[5] (price) $_ (FINISHED)" << endl;
+            cout << "[6] (hashtag) # _ (FINISHED)" << endl;
+            cout << "Please input to find: ";
 
-    //Result Containers
-    unordered_map<string, Trie> map1, map2;
+            string query = "";
+            getline(cin, query); cout << endl;
+            unordered_map<string, Trie> map1, map2;
+            
+            unordered_map<string, Trie> imap = data;
+            unordered_map<string, Trie> omap;
+            checkOperator(query, data, imap, omap);
+            
+            OuputResult(imap); cout << endl;
+            cout << "------------------------------------------------------------------" << endl;
+        }
+        else {
+            break;
+        }
 
-    //Test
-    intitle_filetype_Search(data, map1, key);
-    string tmp;
-    cout << "Word to eliminate: ";
-    getline(cin, tmp);
-    minus_Search(map1, map2, tmp);
-
-
-    unordered_map<string, Trie> imap = data;
-    unordered_map<string, Trie> omap;
-    checkOperator(query, data, imap, omap);
-
-    //vector<int> v;
-    //v = searchWordpos(data["000.txt"].root, "our");
-    OuputResult(imap);
-    //for (int i = 0; i < v.size(); i++)
-        //cout << v[i] << " ";
+    }
+    cout << "Thank you for using!!!" << endl;
 
     destructor(data);
     //destructor(imap);

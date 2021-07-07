@@ -14,9 +14,13 @@
 using namespace std;
 
 
-int checkOperator(string query);
+
+
 void intitle_filetype_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key);
-void minus_Search(unordered_map<string, Trie>& map1, unordered_map<string, Trie>& map2, string key);
+
+void inTitle_Search(unordered_map<string, Trie>& map1,  string key);
+
+void minus_Search(unordered_map<string, Trie>& imap,  string key);
 
 
 void andOperator(string key, unordered_map<string, Trie>& imap);
