@@ -1,6 +1,7 @@
 #include"Trie.h"
 #include"Tool.h"
 #include"InputManager.h"
+#include"QueryHandling.h"
 
 #include<string>
 #include<queue>
@@ -31,10 +32,21 @@ int main(){
     string key = "";
     getline(cin, key);
 
-    vector<int> v;
+    /*vector<int> v;
     v = searchWordpos(data["000.txt"].root, "our");
     //OuputResult(key, data);
     for (int i = 0; i < v.size(); i++)
-        cout << v[i] << " ";
+        cout << v[i] << " ";*/
+
+    //Result Containers
+    unordered_map<string, Trie> map1, map2;
+
+    //Test
+    inTitle_Search(data, map1, map2, key);
+    string tmp;
+    cout << "Word to eliminate: ";
+    getline(cin, tmp);
+    minus_Search(map1, map2, tmp);
+
     destructor(data);
 }
