@@ -11,18 +11,48 @@
 
 using namespace std;
 
-int checkOperator(string query) {
-	stringstream ss(query);
+void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<string,Trie> &imap, unordered_map<string, Trie> &omap) {
+	query + " __END__";
+	stringstream ss(query); //coffee OR tea
 	string tmp;
+	int checkOR = false;
 	while (ss >> tmp) {
 		string get; get = tmp.substr(0, 8);
-		if (tmp == "AND") return 1;
-		if(tmp == "OR") return 2;
-		if (get == "intitle:") return 3;
-		if (tmp[0] == '-') return 4;
-		//if(tmp)
+		if (tmp == "AND") {// AND
+			continue;
+		}
+		else if (tmp == "OR") {// OR
+			checkOR = true;
+			orOperator(data, imap, omap);
+		}
+		else if (get == "intitle:") {
+
+		}
+		else if (tmp[0] == '-') {
+
+		}
+		else if (tmp == "__END__") {
+			if (checkOR) {
+				orOperator(data, imap, omap);
+				imap.clear();
+				imap = omap;
+			}
+		}
+		else {// ' '
+			andOperator(tmp, imap);
+		}
 
 	}
+}
+
+void andOperator(string key, unordered_map<string, Trie> &imap) {
+	unordered_map<string, Trie> tmpmap;
+	for (auto it : imap) {
+		if (searchWord(it.second.root, key, false)) {
+			tmpmap.insert(make_pair(it.first, it.second));
+		}
+	}
+<<<<<<< Updated upstream
 }
 
 void inTitle_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, unordered_map<string, Trie>& map2, string key) {
@@ -53,4 +83,21 @@ void minus_Search(unordered_map<string, Trie>& map1, unordered_map<string, Trie>
 		cout << "[" << i << "] " << itr.first << endl;
 		++i;
 	}
+=======
+	imap.clear();
+	imap = tmpmap;
+	tmpmap.clear();
+}
+
+
+void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& imap, unordered_map<string, Trie>& omap) {
+	for (auto it : imap) {
+		if (omap.find(it.first) == omap.end()) {
+			omap.insert(make_pair(it.first, it.second));
+		}
+	}
+	imap.clear();
+	imap = data;
+
+>>>>>>> Stashed changes
 }

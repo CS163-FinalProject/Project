@@ -67,20 +67,18 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 
 }
 
-void OuputResult(string key, unordered_map<string, Trie> data) {
+void OuputResult(unordered_map<string, Trie> data) {
     int n = 1;
     priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> pq;
     
     for (auto it : data) {
-        if (searchWord(it.second.root, key, false)) {
-            pq.push(it);
-        }
+        pq.push(it);
     }
     cout << "Top 5 results: \n" << endl;
-    if(!pq.empty()) while (n != 6) {
+    while (!pq.empty() /*&& n != 6*/) {
         cout << "[" << n << "] " << pq.top().first << endl;
         pq.pop();
-        n++;
+        //n++;
     }
 }
 

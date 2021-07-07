@@ -1,5 +1,6 @@
 #include"Trie.h"
 #include"Tool.h"
+#include"QueryHandling.h"
 #include"InputManager.h"
 #include"QueryHandling.h"
 
@@ -29,9 +30,11 @@ int main(){
    
     cout << "------------------------------------------------------------------" << endl;
     cout << "Please input a key to find: ";
-    string key = "";
-    getline(cin, key);
+    string query = "";
+    getline(cin, query);
+    
 
+<<<<<<< Updated upstream
     /*vector<int> v;
     v = searchWordpos(data["000.txt"].root, "our");
     //OuputResult(key, data);
@@ -48,5 +51,18 @@ int main(){
     getline(cin, tmp);
     minus_Search(map1, map2, tmp);
 
+=======
+    unordered_map<string, Trie> imap = data;
+    unordered_map<string, Trie> omap;
+    checkOperator(query, data, imap, omap);
+
+    //vector<int> v;
+    //v = searchWordpos(data["000.txt"].root, "our");
+    OuputResult(imap);
+    //for (int i = 0; i < v.size(); i++)
+        //cout << v[i] << " ";
+>>>>>>> Stashed changes
     destructor(data);
+    //destructor(imap);
+    //destructor(omap);
 }
