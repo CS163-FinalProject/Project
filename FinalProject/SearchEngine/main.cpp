@@ -50,6 +50,7 @@ int main(){
 
             string query = "";
             getline(cin, query); cout << endl;
+            
             unordered_map<string, Trie> map1, map2;
             
             unordered_map<string, Trie> imap = data;

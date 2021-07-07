@@ -16,7 +16,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 	//cout << query << endl;
 	stringstream ss(query); //coffee OR tea
 	string tmp;
-	
+
 	while (ss >> tmp) {
 		string get = tmp.substr(0, 8);
 		if (tmp == "AND") {// AND
@@ -24,10 +24,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		}
 		else if (tmp == "OR" || tmp == "END!") {// OR
 			orOperator(data, imap, omap);
-
 			if (tmp == "END!") {
-				orOperator(data, imap, omap);
-
 				imap.clear();
 				imap = omap;
 			}
@@ -42,11 +39,6 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		else if (tmp[0] == '-') { //exclude "-"
 			string key = tmp.substr(1);
 			minus_Search(imap, key);
-		}
-		else if (tmp.substr(0, 9) == "filetype:") {
-			string key = tmp.substr(9);
-			intitle_filetype_Operator(data, omap, key);
-			break;
 		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
@@ -118,6 +110,7 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 			omap.insert(make_pair(it.first, it.second));
 		}
 	}
+
 	imap.clear();
 	imap = data;
 
