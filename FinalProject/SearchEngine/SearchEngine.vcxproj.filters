@@ -32,17 +32,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputManager.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="Trie.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Tool.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Trie.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="QueryHandling.h">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -45,11 +45,13 @@ int main(){
     unordered_map<string, Trie> map1, map2;
 
     //Test
-    intitle_filetype_Search(data, map1, key);
+    //// Move to {void checkOperator}
+
+/*    intitle_filetype_Operator(data, map1, key);
     string tmp;
     cout << "Word to eliminate: ";
     getline(cin, tmp);
-    minus_Search(map1, map2, tmp);
+    minus_Search(map1, map2, tmp); */   
 
 
     unordered_map<string, Trie> imap = data;

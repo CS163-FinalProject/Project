@@ -17,7 +17,6 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 	string tmp;
 	int checkOR = false;
 	while (ss >> tmp) {
-		string get; get = tmp.substr(0, 8);
 		if (tmp == "AND") {// AND
 			continue;
 		}
@@ -25,12 +24,23 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			checkOR = true;
 			orOperator(data, imap, omap);
 		}
-		else if (get == "intitle:") {
 
+		else if (tmp.substr(0, 8) == "intitle:") {
+			string key = tmp.substr(8);
+			intitle_filetype_Operator(data, omap, key);
+			break;	//just 1 time
+		}
+		else if (tmp.substr(0, 9) == "filetype:") {
+			string key = tmp.substr(9);
+			intitle_filetype_Operator(data, omap, key);
+			break;	//just 1 time
 		}
 		else if (tmp[0] == '-') {
-
+			string key = tmp.substr(1);
+			minus_Search(imap, omap, key);
+			break;	//just 1 time
 		}
+
 		else if (tmp == "__END__") {
 			if (checkOR) {
 				orOperator(data, imap, omap);
@@ -55,7 +65,7 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 
 }
 
-void intitle_filetype_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key) {
+void intitle_filetype_Operator(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key) {
 	for (auto itr : data) {
 		string title = itr.first;
 		if (title.find(key) != string::npos) {
