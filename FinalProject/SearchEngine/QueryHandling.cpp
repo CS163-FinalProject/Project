@@ -52,7 +52,7 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 			tmpmap.insert(make_pair(it.first, it.second));
 		}
 	}
-<<<<<<< Updated upstream
+
 }
 
 void inTitle_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, unordered_map<string, Trie>& map2, string key) {
@@ -83,7 +83,7 @@ void minus_Search(unordered_map<string, Trie>& map1, unordered_map<string, Trie>
 		cout << "[" << i << "] " << itr.first << endl;
 		++i;
 	}
-=======
+
 	imap.clear();
 	imap = tmpmap;
 	tmpmap.clear();
@@ -99,5 +99,5 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 	imap.clear();
 	imap = data;
 
->>>>>>> Stashed changes
+
 }
