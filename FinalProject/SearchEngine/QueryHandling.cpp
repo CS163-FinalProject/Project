@@ -55,7 +55,7 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 
 }
 
-void inTitle_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, unordered_map<string, Trie>& map2, string key) {
+void intitle_filetype_Search(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key) {
 	for (auto itr : data) {
 		string title = itr.first;
 		if (title.find(key) != string::npos) {
@@ -83,10 +83,6 @@ void minus_Search(unordered_map<string, Trie>& map1, unordered_map<string, Trie>
 		cout << "[" << i << "] " << itr.first << endl;
 		++i;
 	}
-
-	imap.clear();
-	imap = tmpmap;
-	tmpmap.clear();
 }
 
 

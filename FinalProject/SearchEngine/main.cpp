@@ -34,7 +34,7 @@ int main(){
     getline(cin, query);
     
 
-<<<<<<< Updated upstream
+
     /*vector<int> v;
     v = searchWordpos(data["000.txt"].root, "our");
     //OuputResult(key, data);
@@ -45,13 +45,13 @@ int main(){
     unordered_map<string, Trie> map1, map2;
 
     //Test
-    inTitle_Search(data, map1, map2, key);
+    intitle_filetype_Search(data, map1, key);
     string tmp;
     cout << "Word to eliminate: ";
     getline(cin, tmp);
     minus_Search(map1, map2, tmp);
 
-=======
+
     unordered_map<string, Trie> imap = data;
     unordered_map<string, Trie> omap;
     checkOperator(query, data, imap, omap);
@@ -61,7 +61,7 @@ int main(){
     OuputResult(imap);
     //for (int i = 0; i < v.size(); i++)
         //cout << v[i] << " ";
->>>>>>> Stashed changes
+
     destructor(data);
     //destructor(imap);
     //destructor(omap);
