@@ -9,7 +9,7 @@
 using namespace std;
 
 struct TrieNode{
-        TrieNode* child[42]; //0-9: number, 10-35: character, 36: '@', 37: '.', 38 '$' , 39 '%', 40 '#', 41 '-'
+        TrieNode* child[42]; //0-9: number, 10-35: character, 36: '@', 37: '+', 38 '$' , 39 '%', 40 '#', 41 '-'
         bool isLeaf = false, isTitle;
         vector<int> order;
 };

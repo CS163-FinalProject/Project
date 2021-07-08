@@ -71,8 +71,8 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			}
 			//
 
-			cout << key << endl;
-			break;
+			wildCardOperator(ast, key, imap);
+			
 		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
@@ -155,7 +155,7 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 
 }
 
-void wildCardOpeator(int ast, string key, unordered_map<string, Trie>& imap) {
+void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap) {
 	unordered_map<string, Trie> tmpmap;
 
 	unordered_map<string, unordered_map<int, string>> tmpList;
@@ -182,7 +182,11 @@ void wildCardOpeator(int ast, string key, unordered_map<string, Trie>& imap) {
 
 	//imap contained all words in the line
 
-	for (auto it : imap) {
+	for (int i = 0; i < line.size(); i++) {
+		cout << line[i] << " ";
+	}
+
+	/*for (auto it : imap) {
 		for (int i = 0; i < line.size(); i++) {
 			vector<int> v = searchWordpos(it.second.root, line[i]);
 			if(i == 0) { //firstword
@@ -213,7 +217,7 @@ void wildCardOpeator(int ast, string key, unordered_map<string, Trie>& imap) {
 
 			int fp = firstWordpos[it.first][fw_id];
 			
-			if (tmpList[it.first][fp + 1] == line[curline]) {
+			if (tmpList[it.first].find(fp + 1) != tmpList[it.first].end() && tmpList[it.first][fp + 1] == line[curline]) {
 				curline++;
 			}
 			else {
@@ -229,7 +233,7 @@ void wildCardOpeator(int ast, string key, unordered_map<string, Trie>& imap) {
 	imap.clear();
 	imap = tmpmap;
 	tmpmap.clear();
-
+	*/
 
 }
 

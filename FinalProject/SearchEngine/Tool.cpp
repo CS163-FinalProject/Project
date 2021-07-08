@@ -15,7 +15,7 @@ int get_index(char key){
         return key -'A' + 10;
     }else if( key == '@'){
         return 36;
-    }else if(key == '.'){
+    }else if(key == '+'){
         return 37;
     }else if(key == '$'){
         return 38;
