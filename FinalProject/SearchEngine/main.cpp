@@ -15,7 +15,6 @@
 #include<iterator>
 
 using namespace std;
-typedef unordered_multimap<int, string>::iterator umit;
 
 int main(){
     clock_t begin, end;
@@ -26,7 +25,10 @@ int main(){
     InputListFile("dataset\\___index.txt", data);
 
     //Use for synonyms
-    unordered_map<string, int> tableKey;
+    //Each word will have a special value stored in tableKey that use for search.
+    //Synonyms words have the same value.
+    //That value will be assign to list of synonyms words in the multimap.
+    unordered_map<string, int> tableKey;  
     unordered_multimap<int, string> synonyms;
     InputSynonymsFile(tableKey, synonyms);
 
@@ -65,6 +67,7 @@ int main(){
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
             checkOperator(query, data, imap, omap);
+            //Synonyms_Search(query, imap, omap, tableKey, synonyms);
             
             OuputResult(imap); cout << endl;
             cout << "------------------------------------------------------------------" << endl;
