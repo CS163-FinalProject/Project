@@ -1,6 +1,7 @@
 #ifndef _QUERY_
 #define _QUERY_
 #include"Trie.h"
+#include"Tool.h"
 
 #include<string>
 #include<queue>

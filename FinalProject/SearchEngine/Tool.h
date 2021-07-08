@@ -14,4 +14,5 @@ string get_dir(string folder, string filename);
 
 int string_to_int(string str);
 
+int binarySearch(int x, vector<int> a, int l, int r);
 #endif

@@ -1,5 +1,6 @@
 #include"QueryHandling.h"
 #include"Trie.h"
+#include"Tool.h"
 
 #include<string>
 #include<queue>
@@ -150,83 +151,68 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 
 void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap) {
 	unordered_map<string, Trie> tmpmap;
-
-	unordered_map<string, unordered_map<int, string>> tmpList;
 	
-	unordered_map<string, vector<int>> firstWordpos;
+	unordered_map<string, vector<vector<int>>> wordpos;
 
 	stringstream ss(key);
 
 	vector<string> line;
 
-	string tmp;
+	string tmp; bool accept; int num = 0;
 
 	while (ss >> tmp) {// filter all files contain all the words in " "
 		line.push_back(tmp);
-		for (auto it : imap) {
-			if (searchWord(it.second.root, tmp, false)) {
-				tmpmap.insert(make_pair(it.first, it.second));
-			}
-		}
-		imap.clear();
-		imap = tmpmap;
-		tmpmap.clear();
 	}
 
-	//imap contained all words in the line
 
-	for (int i = 0; i < line.size(); i++) {
-		cout << line[i] << " ";
-	}
-
-	/*for (auto it : imap) {
-		for (int i = 0; i < line.size(); i++) {
-			vector<int> v = searchWordpos(it.second.root, line[i]);
-			if(i == 0) { //firstword
-				firstWordpos[it.first] = v;
-			}
-			for (int j = 0; j < v.size(); i++) {
-				tmpList[it.first][v[j]] = line[i];
-			}	
-		}
-	}
-	
-	// create tmpList
-
-	int fw_id = 0;
-	int curline = 1;
-	bool accept = false;
 	for (auto it : imap) {
-		while (true) {
-			if (fw_id >= firstWordpos[it.first].size()) {
+		accept = true;
+		for (string str : line) {
+			if (!searchWord(it.second.root, str, false)) {
 				accept = false;
 				break;
 			}
-
-			if (curline >= line.size()) {
-				accept = true;
-				break;
-			}
-
-			int fp = firstWordpos[it.first][fw_id];
-			
-			if (tmpList[it.first].find(fp + 1) != tmpList[it.first].end() && tmpList[it.first][fp + 1] == line[curline]) {
-				curline++;
-			}
 			else {
-				fw_id++;
+				wordpos[it.first].push_back(searchWordpos(it.second.root, str));
+				num++;
 			}
 		}
-
 		if (accept) {
 			tmpmap.insert(make_pair(it.first, it.second));
+		}
+		else {
+			wordpos[it.first].clear();
+		}
+	}
+	imap.clear();
+	imap = tmpmap;
+	tmpmap.clear();
+	
+	for (auto it : wordpos) {
+		int i = 0; int j = 0; int lvl = 0;
+		if (it.second.size() != 0) {
+			while (i < it.second.size() - 1 && lvl < it.second[0].size()) {
+				int u = it.second[i][j];
+				int mid = binarySearch(u + 1, it.second[i + 1], 0, it.second[i + 1].size() - 1);
+				if (mid != -1) {
+					i++;
+					j = mid;
+				}
+				else {
+					i = 0;
+					++lvl;
+					j = lvl;
+				}
+			}
+			if (i == it.second.size() - 1) {
+				tmpmap[it.first] = imap[it.first];
+			}
 		}
 	}
 
 	imap.clear();
 	imap = tmpmap;
 	tmpmap.clear();
-	*/
 
 }
 

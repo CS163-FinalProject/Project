@@ -50,3 +50,21 @@ vector<pair<string,int>> to_vector(unordered_map<string, int> map){
     }
     return ret;
 }
+
+int binarySearch(int x, vector<int> a, int l, int r) {
+    if (l <= r) {
+        int mid = (l + r) / 2;
+        if (a[mid] == x) {
+            return mid;
+        }
+        else if (a[mid] < x) {
+            return binarySearch(x, a, mid+1, r);
+        }
+        else if (a[mid] > x) {
+            return binarySearch(x, a, l, mid-1);
+        }
+    }
+    else {
+        return -1;
+    }
+}
