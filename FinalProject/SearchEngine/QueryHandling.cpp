@@ -43,7 +43,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		}
 		else if (get2 == "filetype:") { // filetype:
 			string key = tmp.substr(9);
-			intitle_filetype_Operator(imap, key);
+			filetypeOperator(imap, key);
 		}
 		else if (tmp[0] == '"') {
 			int ast = 1; int pos = 0; int start = -1;
@@ -101,7 +101,7 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 
 
 
-void intitle_filetype_Operator(unordered_map<string, Trie>& imap, string key) {
+void filetypeOperator(unordered_map<string, Trie>& imap, string key) {
 	unordered_map<string, Trie> tmpmap;
 	for (auto itr : imap) {
 		string title = itr.first;
@@ -247,4 +247,28 @@ void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_ma
 	tmpmap.clear();
 }
 
+void rangeOperator(unordered_map<string, Trie>& imap, string key)	//key is "$50..$100"
+{
+	int from, end;
+	if (key[0] >= 48 && key[0] <= 57) //not $
+		from = atoi(key.c_str());
+	else from = atoi(key.substr(1).c_str());
 
+	string tmp = key.substr(key.find('.') + 2);	//$100
+	if (tmp[0] >= 48 && key[0] <= 57) end = atoi(tmp.c_str());
+	else end = atoi(tmp.substr(1).c_str());
+
+	unordered_map<string, Trie> tmpmap;
+
+	for (int i = from; i <= end; ++i)
+	{
+		string val = to_string(i);
+		for (auto k : imap)
+			if (searchWord(k.second.root, val, false)) {
+				tmpmap.insert(make_pair(k.first, k.second));
+			}
+	}
+
+	imap.clear();
+	imap = tmpmap;
+}
