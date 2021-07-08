@@ -34,10 +34,9 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		}
 		else if (get == "intitle:") { //intitle:
 			//string left = tmp.substr(8);
-			string key = query.substr(query.find(tmp) + 8);
+			string key = tmp.substr(8);
 			
 			inTitle_Search(imap, key);
-			break;
 		}
 		else if (tmp[0] == '-') { //exclude "-"
 			string key = tmp.substr(1);
@@ -112,15 +111,11 @@ void intitle_filetype_Operator(unordered_map<string, Trie>& imap, string key) {
 
 void inTitle_Search(unordered_map<string, Trie>& imap, string key) {
 	unordered_map<string, Trie> tmpmap;
-	stringstream ss(key);
-	string tmp;
-	while (ss >> tmp){
-		for (auto itr : imap) {
-			string title = itr.first;
-			if (title.find(tmp) != string::npos) {
-				tmpmap.insert(make_pair(itr.first, itr.second));
-			}
-
+	
+	for (auto itr : imap) {
+		string title = itr.first;
+		if (title.find(key) != string::npos) {
+			tmpmap.insert(make_pair(itr.first, itr.second));
 		}
 	}
 
@@ -197,7 +192,7 @@ void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap) {
 			}	
 		}
 	}
-
+	
 	// create tmpList
 
 	int fw_id = 0;
