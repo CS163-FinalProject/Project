@@ -54,9 +54,11 @@ int main(){
             cout << "[1] _ AND _ (FINISHED)" << endl;
             cout << "[2] _ OR _ (FINISHED)" << endl;
             cout << "[3] intitle: _ to the end. (FINISHED)" << endl;
-            cout << "[4] (exclude) -_ (FINISHED)" << endl;
-            cout << "[5] (price) $_ (FINISHED)" << endl;
-            cout << "[6] (hashtag) # _ (FINISHED)" << endl;
+            cout << "[4] filetype:txt (FINISHED)" << endl;
+            cout << "[5] (exclude) -_ (FINISHED)" << endl;
+            cout << "[6] (price) $ _ (FINISHED)" << endl;
+            cout << "[7] (hashtag) # _ (FINISHED)" << endl;
+
             cout << "Please input to find: ";
 
             string query = "";

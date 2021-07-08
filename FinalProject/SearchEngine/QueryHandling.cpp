@@ -21,6 +21,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 
 	while (ss >> tmp) {
 		string get = tmp.substr(0, 8);
+		string get2 = tmp.substr(0, 9);
 		if (tmp == "AND") {// AND
 			continue;
 		}
@@ -32,7 +33,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			}
 		}
 		else if (get == "intitle:") { //intitle:
-			string left = tmp.substr(8);
+			//string left = tmp.substr(8);
 			string key = query.substr(query.find(tmp) + 8);
 			
 			inTitle_Search(imap, key);
@@ -41,6 +42,10 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 		else if (tmp[0] == '-') { //exclude "-"
 			string key = tmp.substr(1);
 			minus_Search(imap, key);
+		}
+		else if (get2 == "filetype:") { // filetype:
+			string key = tmp.substr(9);
+			intitle_filetype_Operator(imap, key);
 		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
@@ -64,13 +69,18 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 
 
 
-void intitle_filetype_Operator(unordered_map<string, Trie>& data, unordered_map<string, Trie>& map1, string key) {
-	for (auto itr : data) {
+void intitle_filetype_Operator(unordered_map<string, Trie>& imap, string key) {
+	unordered_map<string, Trie> tmpmap;
+	for (auto itr : imap) {
 		string title = itr.first;
-		if (title.find(key) != string::npos) {
-			map1.insert(make_pair(itr.first, itr.second));
+		string type = title.substr(title.find(".") + 1);
+		if (type == key) {
+			tmpmap.insert(make_pair(itr.first, itr.second));
 		}
 	}
+
+	imap.clear();
+	imap = tmpmap;
 }
 
 void inTitle_Search(unordered_map<string, Trie>& imap, string key) {
