@@ -46,20 +46,23 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			intitle_filetype_Operator(imap, key);
 		}
 		else if (tmp[0] == '"') {
-			int ast = 0;
+			int ast = 1; int pos = 0; int start = -1;
 			string key = "";
 
 			//case "* building" * at the first pos is the same as searching "building" alone
 			if (tmp.substr(1) != "*") {
 				key += tmp.substr(1);
+				++pos;
 			}
 			//get word in between "tallest * building"
 			while (tmp.back() != '"') {
 				ss >> tmp;
 				if (tmp == "*") {
+					if(start == -1) start = pos;
 					++ast;
 					continue;
 				}
+				++pos;
 				key = key + " " + tmp;
 			}
 			key.pop_back();
@@ -69,7 +72,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			}
 			//
 
-			wildCardOperator(ast, key, imap);
+			wildCardOperator(start, ast, key, imap);
 			
 		}
 		else {// '$' '#' ' '
@@ -149,7 +152,7 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 
 }
 
-void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap) {
+void wildCardOperator(int start, int ast, string key, unordered_map<string, Trie>& imap) {
 	unordered_map<string, Trie> tmpmap;
 	
 	unordered_map<string, vector<vector<int>>> wordpos;
@@ -192,8 +195,11 @@ void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap) {
 		int i = 0; int j = 0; int lvl = 0;
 		if (it.second.size() != 0) {
 			while (i < it.second.size() - 1 && lvl < it.second[0].size()) {
+				if (start != -1 && i != start - 1) {
+					ast = 1;
+				}
 				int u = it.second[i][j];
-				int mid = binarySearch(u + 1, it.second[i + 1], 0, it.second[i + 1].size() - 1);
+				int mid = binarySearch(u + ast, it.second[i + 1], 0, it.second[i + 1].size() - 1);
 				if (mid != -1) {
 					i++;
 					j = mid;

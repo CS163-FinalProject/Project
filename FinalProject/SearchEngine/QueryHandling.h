@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-void wildCardOperator(int ast, string key, unordered_map<string, Trie>& imap);
+void wildCardOperator(int start, int ast, string key, unordered_map<string, Trie>& imap);
 
 void inTitle_Search(unordered_map<string, Trie>& map1,  string key);
 
