@@ -47,6 +47,33 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			string key = tmp.substr(9);
 			intitle_filetype_Operator(imap, key);
 		}
+		else if (tmp[0] == '"') {
+			int ast = 0;
+			string key = "";
+
+			//case "* building" * at the first pos is the same as searching "building" alone
+			if (tmp.substr(1) != "*") {
+				key += tmp.substr(1);
+			}
+			//get word in between "tallest * building"
+			while (tmp.back() != '"') {
+				ss >> tmp;
+				if (tmp == "*") {
+					++ast;
+					continue;
+				}
+				key = key + " " + tmp;
+			}
+			key.pop_back();
+			//case "building *" * at the final pos is the same as searching "building" alone
+			if (key.back() == '*') {
+				key.pop_back();
+			}
+			//
+
+			cout << key << endl;
+			break;
+		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
 		}
@@ -125,6 +152,84 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 
 	imap.clear();
 	imap = data;
+
+}
+
+void wildCardOpeator(int ast, string key, unordered_map<string, Trie>& imap) {
+	unordered_map<string, Trie> tmpmap;
+
+	unordered_map<string, unordered_map<int, string>> tmpList;
+	
+	unordered_map<string, vector<int>> firstWordpos;
+
+	stringstream ss(key);
+
+	vector<string> line;
+
+	string tmp;
+
+	while (ss >> tmp) {// filter all files contain all the words in " "
+		line.push_back(tmp);
+		for (auto it : imap) {
+			if (searchWord(it.second.root, tmp, false)) {
+				tmpmap.insert(make_pair(it.first, it.second));
+			}
+		}
+		imap.clear();
+		imap = tmpmap;
+		tmpmap.clear();
+	}
+
+	//imap contained all words in the line
+
+	for (auto it : imap) {
+		for (int i = 0; i < line.size(); i++) {
+			vector<int> v = searchWordpos(it.second.root, line[i]);
+			if(i == 0) { //firstword
+				firstWordpos[it.first] = v;
+			}
+			for (int j = 0; j < v.size(); i++) {
+				tmpList[it.first][v[j]] = line[i];
+			}	
+		}
+	}
+
+	// create tmpList
+
+	int fw_id = 0;
+	int curline = 1;
+	bool accept = false;
+	for (auto it : imap) {
+		while (true) {
+			if (fw_id >= firstWordpos[it.first].size()) {
+				accept = false;
+				break;
+			}
+
+			if (curline >= line.size()) {
+				accept = true;
+				break;
+			}
+
+			int fp = firstWordpos[it.first][fw_id];
+			
+			if (tmpList[it.first][fp + 1] == line[curline]) {
+				curline++;
+			}
+			else {
+				fw_id++;
+			}
+		}
+
+		if (accept) {
+			tmpmap.insert(make_pair(it.first, it.second));
+		}
+	}
+
+	imap.clear();
+	imap = tmpmap;
+	tmpmap.clear();
+
 
 }
 
