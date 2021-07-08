@@ -60,6 +60,7 @@ int main(){
             cout << "[7] wildcard \"tallest * building\" (FINISHED)" << endl;
             cout << "[8] (price) $ _ (FINISHED)" << endl;
             cout << "[9] (hashtag) # _ (FINISHED)" << endl;
+            cout << "[10] (synonym) ~ _ (FINISHED)" << endl;
 
             cout << "Please input to find: ";
 
@@ -70,7 +71,7 @@ int main(){
             
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
-            checkOperator(query, data, imap, omap);
+            checkOperator(query, data, imap, omap , tableKey, synonyms);
             //Synonyms_Search(query, imap, omap, tableKey, synonyms);
             
             OuputResult(imap); cout << endl;
@@ -86,7 +87,8 @@ int main(){
 
     
 
-
+    tableKey.clear();
+    synonyms.clear();
     destructor(data);
     //destructor(imap);
     //destructor(omap);

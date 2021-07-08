@@ -14,7 +14,7 @@ using namespace std;
 typedef unordered_multimap<int, string>::iterator umit;
 
 
-void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<string,Trie> &imap, unordered_map<string, Trie> &omap) {
+void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<string,Trie> &imap, unordered_map<string, Trie> &omap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
 	query = query + " END!";
 	//cout << query << endl;
 	stringstream ss(query); //coffee OR tea
@@ -73,7 +73,11 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			//
 
 			wildCardOperator(start, ast, key, imap);
-			
+		}
+		else if (tmp[0] == '~') {
+			string key = tmp.substr(1);
+
+			Synonyms_Search(key, imap, tableKey, synonyms);
 		}
 		else {// '$' '#' ' '
 			andOperator(tmp, imap);
@@ -222,24 +226,25 @@ void wildCardOperator(int start, int ast, string key, unordered_map<string, Trie
 
 }
 
-void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_map<string, Trie>& omap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
+void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
 	//umit is unordered_multimap iterator
 	//equal_range return the begin and end iterators for the synonyms list
 	pair<umit, umit> itr = synonyms.equal_range(tableKey[key]);
 	umit i = itr.first;
-
+	unordered_map<string, Trie> tmpmap;
 	while (i != itr.second) {
 		string synonym_word = i->second;
 		for (auto k : imap) {
 			if (searchWord(k.second.root, synonym_word, false)) {
-				omap.insert(make_pair(k.first, k.second));
+				tmpmap.insert(make_pair(k.first, k.second));
 			}
 		}
 		++i;
 	}
 
-	imap.swap(omap);
-	omap.clear();
+	imap.clear();
+	imap = tmpmap;
+	tmpmap.clear();
 }
 
 
