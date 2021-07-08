@@ -58,8 +58,8 @@ int main(){
             cout << "[5] (exclude) -_ (FINISHED)" << endl;
             cout << "[6] exact word \"tallest bulding\" (FINISHED)" << endl;
             cout << "[7] wildcard \"tallest * building\" (FINISHED)" << endl;
-            cout << "[6] (price) $ _ (FINISHED)" << endl;
-            cout << "[7] (hashtag) # _ (FINISHED)" << endl;
+            cout << "[8] (price) $ _ (FINISHED)" << endl;
+            cout << "[9] (hashtag) # _ (FINISHED)" << endl;
 
             cout << "Please input to find: ";
 
