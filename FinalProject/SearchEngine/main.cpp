@@ -12,15 +12,24 @@
 #include<algorithm>
 #include<sstream>
 #include<time.h>
+#include<iterator>
 
 using namespace std;
+typedef unordered_multimap<int, string>::iterator umit;
 
 int main(){
     clock_t begin, end;
     cout << "Building..." << endl;
     begin = clock();
+
     unordered_map<string,Trie> data;
     InputListFile("dataset\\___index.txt", data);
+
+    //Use for synonyms
+    unordered_map<string, int> tableKey;
+    unordered_multimap<int, string> synonyms;
+    InputSynonymsFile(tableKey, synonyms);
+
     end = clock();
 
     data["053.txt"].score = 0;

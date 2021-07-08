@@ -87,3 +87,28 @@ void destructor(unordered_map<string, Trie>& data) {
         deleteTrie(it.second.root);
     }
 }
+
+void InputSynonymsFile(unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
+    fstream fin;
+    fin.open("data.csv");
+
+    while (!fin.eof())
+    {
+        string line;
+        int i = 1;
+        while (getline(fin, line))
+        {
+            stringstream s(line);
+            string word;
+
+            while (getline(s, word, ',') && word != "")
+            {
+                tableKey.insert(make_pair(word, i));
+                synonyms.insert(make_pair(i, word));
+            }
+            ++i;
+        }
+    }
+
+    fin.close();
+}
