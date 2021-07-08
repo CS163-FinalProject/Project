@@ -33,9 +33,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			}
 		}
 		else if (get == "intitle:") { //intitle:
-			//string left = tmp.substr(8);
 			string key = tmp.substr(8);
-			
 			inTitle_Search(imap, key);
 		}
 		else if (tmp[0] == '-') { //exclude "-"
