@@ -49,6 +49,7 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 			//case "* building" * at the first pos is the same as searching "building" alone
 			if (tmp.substr(1) != "*") {
 				key += tmp.substr(1);
+				line.push_back(key);
 				++pos;
 			}
 			//get word in between "tallest * building"
@@ -60,6 +61,12 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 					continue;
 				}
 				++pos;
+				if (tmp.back() == '"') {
+					string tmp2 = tmp;
+					tmp2.pop_back();
+					line.push_back(tmp2);	
+				}else line.push_back(tmp);
+
 				key = key + " " + tmp;
 			}
 			if(key.back() == '"') key.pop_back();
@@ -68,7 +75,7 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 				key.pop_back();
 			}
 			//
-			line.push_back(key);
+			
 			wildCardOperator(start, ast, key, imap);
 		}
 		else if (tmp.find("..") != string::npos) {

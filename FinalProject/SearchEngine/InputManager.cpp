@@ -67,41 +67,45 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 
 }
 
-void Preview(string key, vector<string> line) {
+void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line) {
     string folder = "dataset\\";
     string filename = folder + key;
 
     ifstream fin;
     fin.open(filename);
 
-    string tmp;
-    if (fin.is_open()) {
-        getline(fin, tmp);
+    vector<int> highlight;
 
+    for (int i = 0; i < line.size(); i++) {
+        vector<int> v = searchWordpos(data[key].root, line[i]);
+        for (int i = 0; i < v.size(); i++) {
+            highlight.push_back(v[i]);
+        }
     }
-    else {
-        cout << "Cant open file";
-    }
-    fin.close();
-}
-
-void OpenFile(string key, vector<string> line) {
-    string folder = "dataset\\";
-    string filename = folder + key;
-
-    ifstream fin;
-    fin.open(filename);
-
+    
+    sort(highlight.begin(), highlight.end());
+    int place = 1;
+    int i = 0;
     string tmp;
+    string word;
     if (fin.is_open()) {
-        getline(fin, tmp);
-        
-        for (int i = 0; i < line.size(); i++) {
-            if (tmp.find(line[i]) != string::npos) {
-                int pos = tmp.find(line[i]);
-                string highlight = tmp.substr(pos, pos + line[i].size());
-
+        while (!fin.eof()) {
+            getline(fin, tmp);
+            stringstream ss(tmp);
+            while (ss >> word) {
+                
+                if (i < highlight.size() && place == highlight[i]) {
+                    system("Color 7C");
+                    ++i;
+                    cout << word << " ";
+                }
+                else {
+                    system("Color 0F");
+                    cout << word << " ";
+                }
+                ++place;
             }
+            cout << endl;
         }
     }
     else {
@@ -127,7 +131,7 @@ void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
         cout << "[2] Get all results (no preview mode)" << endl;
         cout << "[3] Quit and search another query" << endl;
         
-        cout << "You choose mode (1,2,3): ";  cin >> choice;
+        cout << "You choose mode (1,2,3): ";  cin >> choice; cin.ignore();
 
         if (choice == 1) {
             cout << "\n-Top 5 results:" << endl;
@@ -137,6 +141,25 @@ void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
                 tmpq.pop();
                 n++;
             }
+            /*while (true) {
+                string key;
+                int mode = -1;
+                cout << "Do you want to fullview a file: " << endl;
+                cout << "[1] Yes \t [2] No: "; cin >> mode; cin.ignore();
+                if (mode == 1) {
+                    cout << "File to fullview: "; 
+                    getline(cin, key);
+                    OpenFile(key, data, line);
+                }
+                else if (mode == 2) {
+                    break;
+                }
+                else {
+                    cout << "Invalid choice, please try again\n" << endl;
+                }
+            }*/
+            
+
             cout << "------------------------------------------------------------------" << endl;
         }
         else if (choice == 2) {
