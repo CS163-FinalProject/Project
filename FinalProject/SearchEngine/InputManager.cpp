@@ -108,12 +108,12 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
                     ++preview_cnt;
                 }
 
-                if (preview_cnt >= 50) {
+                if (preview_cnt >= 100) {
                     break;
                 }
                 ++cnt;
             }
-            if (preview_cnt >= 50) {
+            if (preview_cnt >= 100) {
                 break;
             }
             
@@ -172,31 +172,14 @@ void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
                 tmpq.pop();
                 n++;
             }
-            /*while (true) {
-                string key;
-                int mode = -1;
-                cout << "Do you want to fullview a file: " << endl;
-                cout << "[1] Yes \t [2] No: "; cin >> mode; cin.ignore();
-                if (mode == 1) {
-                    cout << "File to fullview: "; 
-                    getline(cin, key);
-                    OpenFile(key, data, line);
-                }
-                else if (mode == 2) {
-                    break;
-                }
-                else {
-                    cout << "Invalid choice, please try again\n" << endl;
-                }
-            }*/
             
-
             cout << "------------------------------------------------------------------" << endl;
         }
         else if (choice == 2) {
             cout << "\n-All results:" << endl;
             cout << "------------------------------------------------------------------" << endl;
             while (!tmpq.empty()) {
+                
                 cout << "[" << n << "] " << tmpq.top().first;
                 tmpq.pop();
                 if (!tmpq.empty()) {

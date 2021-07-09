@@ -49,6 +49,7 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 			//case "* building" * at the first pos is the same as searching "building" alone
 			if (tmp.substr(1) != "*") {
 				key += tmp.substr(1);
+				if (key.back() == '"') key.pop_back();
 				line.push_back(key);
 				++pos;
 			}
