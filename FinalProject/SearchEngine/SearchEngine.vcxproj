@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="stopwords_list.txt" />
+    <Text Include="stopwords_list_Shorter.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

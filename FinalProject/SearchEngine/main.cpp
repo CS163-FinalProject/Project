@@ -12,7 +12,7 @@
 #include<algorithm>
 #include<sstream>
 #include<time.h>
-#include< stdlib.h >
+#include<stdlib.h>
 #include<iterator>
 
 using namespace std;
@@ -32,6 +32,9 @@ int main(){
     unordered_map<string, int> tableKey;  
     unordered_multimap<int, string> synonyms;
     InputSynonymsFile(tableKey, synonyms);
+
+    Trie dataStopwords;
+    inputStopwordsFile("stopwords_list_Shorter.txt", dataStopwords);
 
     end = clock();
 
