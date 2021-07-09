@@ -72,12 +72,15 @@ int main(){
             getline(cin, query); cout << endl;
             
             unordered_map<string, Trie> map1, map2;
-            
+            vector<string> line;
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
-            checkOperator(query, data, imap, omap , tableKey, synonyms);
+            checkOperator(line, query, data, imap, omap , tableKey, synonyms);
             //Synonyms_Search(query, imap, omap, tableKey, synonyms);
-            
+            for (int i = 0; i < line.size(); i++) {
+                cout << line[i] << " ";
+            }
+            cout << endl;
             OuputResult(imap); cout << endl;
             cout << "------------------------------------------------------------------" << endl;
         }

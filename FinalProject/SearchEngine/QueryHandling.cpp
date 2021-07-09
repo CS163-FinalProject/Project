@@ -10,12 +10,12 @@ using namespace std;
 typedef unordered_multimap<int, string>::iterator umit;
 
 
-void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<string,Trie> &imap, unordered_map<string, Trie> &omap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
+void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> data, unordered_map<string,Trie> &imap, 
+	unordered_map<string, Trie> &omap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms) {
 	query = query + " END!";
 	//cout << query << endl;
 	stringstream ss(query); //coffee OR tea
 	string tmp;
-	vector<string> line;
 
 	while (ss >> tmp) {
 		string get = tmp.substr(0, 8);
@@ -72,7 +72,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 			wildCardOperator(start, ast, key, imap);
 		}
 		else if (tmp.find("..") != string::npos) {
-			rangeOperator(imap, tmp);
+			rangeOperator(imap, tmp, line);
 		}
 		else if (tmp[0] == '~') {
 			string key = tmp.substr(1);
@@ -251,7 +251,7 @@ void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_ma
 	tmpmap.clear();
 }
 
-void rangeOperator(unordered_map<string, Trie>& imap, string key)	//key is "$50..$100"
+void rangeOperator(unordered_map<string, Trie>& imap, string key, vector<string> &line)	//key is "$50..$100"
 {
 	int from, end;
 	bool dollar;
@@ -276,7 +276,7 @@ void rangeOperator(unordered_map<string, Trie>& imap, string key)	//key is "$50.
 		string val;
 		if (!dollar) val = to_string(i);
 		else val = key[0] + to_string(i);
-
+		line.push_back(val);
 		for (auto k : imap)
 			if (searchWord(k.second.root, val, false))
 				tmpmap.insert(make_pair(k.first, k.second));

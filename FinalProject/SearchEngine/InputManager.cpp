@@ -67,22 +67,66 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 
 }
 
+void OpenFile(string key) {
+    string folder = "dataset\\";
+    string filename = folder + key;
+
+    ifstream fin;
+    fin.open(filename);
+
+
+
+    fin.close();
+}
+
 void OuputResult(unordered_map<string, Trie> data) {
-    int n = 1;
-    priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> pq;
     
+    priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> pq;
+    priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> tmpq;
     for (auto it : data) {
         pq.push(it);
     }
-    int choice;
-    cout << "You choose: " << endl;
-    cout << "[1] Search top 5 results (preview mode)" << endl;
-    cout << "[2] Search all results (no preview mode)" << endl;
-    cout << "All results: \n" << endl;
-    while (!pq.empty() /*&& n != 6*/) {
-        cout << "[" << n << "] " << pq.top().first << endl;
-        pq.pop();
-        n++;
+    while (true) {
+        int choice;
+        int n = 1;
+        tmpq = pq;
+        cout << "[1] Get top 5 results (preview mode)" << endl;
+        cout << "[2] Get all results (no preview mode)" << endl;
+        cout << "[3] Quit and search another query" << endl;
+        
+        cout << "You choose mode (1,2,3): ";  cin >> choice;
+
+        if (choice == 1) {
+            cout << "\n-Top 5 results: \n" << endl;
+            while (!tmpq.empty() && n != 6) {
+                cout << "[" << n << "] " << tmpq.top().first << endl;
+                tmpq.pop();
+                n++;
+            }
+            cout << "------------------------------------------------------------------" << endl;
+        }
+        else if (choice == 2) {
+            cout << "\n-All results: \n" << endl;
+            while (!tmpq.empty()) {
+                cout << "[" << n << "] " << tmpq.top().first;
+                tmpq.pop();
+                if (!tmpq.empty()) {
+                    cout << '\t' << '\t' << "[" << n + 1 << "] " << tmpq.top().first << endl;
+                    tmpq.pop();
+                }
+                else {
+                    cout << endl;
+                }
+                n += 2;
+            }
+            cout << "------------------------------------------------------------------" << endl;
+        }
+        else if (choice == 3) {
+            break;
+        }
+        else {
+            cout << "Invalid choice, please try again\n" << endl;  
+        }
     }
 }
 
