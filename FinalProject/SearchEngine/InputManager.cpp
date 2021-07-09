@@ -108,12 +108,12 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
                     ++preview_cnt;
                 }
 
-                if (preview_cnt >= 20) {
+                if (preview_cnt >= 50) {
                     break;
                 }
                 ++cnt;
             }
-            if (preview_cnt >= 20) {
+            if (preview_cnt >= 50) {
                 break;
             }
             
