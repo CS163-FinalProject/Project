@@ -218,3 +218,24 @@ void InputSynonymsFile(unordered_map<string, int>& tableKey, unordered_multimap<
 
     fin.close();
 }
+
+void inputStopwordsFile(string filename, Trie& dataStopwords)
+{
+    ifstream fin;
+    fin.open(filename);
+
+    string word;
+    int place = 1;
+    dataStopwords.root = getNode();
+    if (fin.is_open()) {
+        while (!fin.eof()) 
+        {
+            getline(fin, word);
+            insert(dataStopwords.root, word, place, false);
+            ++place;
+        }
+    }
+    else cout << "Can't open file !\n";
+
+    fin.close();
+}

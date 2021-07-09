@@ -28,4 +28,6 @@ void destructor(unordered_map<string, Trie>& data);
 
 void InputSynonymsFile(unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms);
 
+void inputStopwordsFile(string filename, Trie& dataStopwords);
+
 #endif
