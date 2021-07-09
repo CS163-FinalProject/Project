@@ -1,9 +1,5 @@
 #include"Tool.h"
 
-#include<iostream>
-#include<unordered_map>
-#include<vector>
-
 using namespace std;
 
 int get_index(char key){
