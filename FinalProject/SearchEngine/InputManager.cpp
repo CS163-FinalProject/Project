@@ -74,6 +74,10 @@ void OuputResult(unordered_map<string, Trie> data) {
     for (auto it : data) {
         pq.push(it);
     }
+    int choice;
+    cout << "You choose: " << endl;
+    cout << "[1] Search top 5 results (preview mode)" << endl;
+    cout << "[2] Search all results (no preview mode)" << endl;
     cout << "All results: \n" << endl;
     while (!pq.empty() /*&& n != 6*/) {
         cout << "[" << n << "] " << pq.top().first << endl;
