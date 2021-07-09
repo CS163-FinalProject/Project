@@ -36,4 +36,5 @@ void orOperator(unordered_map<string, Trie> data, unordered_map<string, Trie>& i
 void checkOperator(vector<string> &line, string query, unordered_map<string, Trie> data, unordered_map<string, Trie>& imap, unordered_map<string, Trie>& omap, 
 	unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms);
 
+
 #endif

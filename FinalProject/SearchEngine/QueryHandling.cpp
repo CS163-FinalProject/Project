@@ -292,3 +292,7 @@ void rangeOperator(unordered_map<string, Trie>& imap, string key, vector<string>
 	imap.clear();
 	imap = tmpmap;
 }
+
+
+//Use searchWord(dataStopwords.root, key, false); to check the StopWords to remove
+//Move it to checkOperator before check AND, OR...
