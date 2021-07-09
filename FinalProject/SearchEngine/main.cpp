@@ -12,6 +12,7 @@
 #include<algorithm>
 #include<sstream>
 #include<time.h>
+#include< stdlib.h >
 #include<iterator>
 
 using namespace std;
@@ -49,20 +50,23 @@ int main(){
 
         cout << "You choose: "; cin >> choice; cin.ignore();
         cout << "------------------------------------------------------------------" << endl;
+        system("cls");
         if (choice == 1) {
-            cout << "Queries:" << endl;
-            cout << "[1] _ AND _ (FINISHED)" << endl;
-            cout << "[2] _ OR _ (FINISHED)" << endl;
-            cout << "[3] intitle: _ to the end. (FINISHED)" << endl;
-            cout << "[4] filetype:txt (FINISHED)" << endl;
-            cout << "[5] (exclude) -_ (FINISHED)" << endl;
-            cout << "[6] exact word \"tallest bulding\" (FINISHED)" << endl;
-            cout << "[7] wildcard \"tallest * building\" (FINISHED)" << endl;
-            cout << "[8] (price) $ _ (FINISHED)" << endl;
-            cout << "[9] (hashtag) # _ (FINISHED)" << endl;
-            cout << "[10] (synonym) ~ _ (FINISHED)" << endl;
+            cout << "Queries:" << "\n\n";
+            cout << " [1] (and)        _ AND _                (FINISHED)" << endl;
+            cout << " [2] (or)         _ OR _                 (FINISHED)" << endl;
+            cout << " [3] (intitle)    intitle:_              (FINISHED)" << endl;
+            cout << " [4] (filetype)   filetype:txt           (FINISHED)" << endl;
+            cout << " [5] (exclude)    -_                     (FINISHED)" << endl;
+            cout << " [6] (include)    +_                     (FINISHED)" << endl;
+            cout << " [7] (exact word) \"tallest bulding\"      (FINISHED)" << endl;
+            cout << " [8] (wildcard)   \"tallest * building\"   (FINISHED)" << endl;
+            cout << " [9] (price)      $_                     (FINISHED)" << endl;
+            cout << "[10] (hashtag)    #_                     (FINISHED)" << endl;
+            cout << "[11] (range)      50..100                (FINISHED)" << endl;
+            cout << "[12] (synonym)    ~_                     (FINISHED)" << endl;
 
-            cout << "Please input to find: ";
+            cout << "\nPlease input to find: ";
 
             string query = "";
             getline(cin, query); cout << endl;

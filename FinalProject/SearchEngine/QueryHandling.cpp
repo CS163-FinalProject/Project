@@ -51,7 +51,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 				++pos;
 			}
 			//get word in between "tallest * building"
-			while (tmp.back() != '"') {
+			while (tmp != ""  && tmp.back() != '"') {
 				ss >> tmp;
 				if (tmp == "*") {
 					if(start == -1) start = pos;
@@ -61,7 +61,7 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 				++pos;
 				key = key + " " + tmp;
 			}
-			key.pop_back();
+			if(key.back() == '"') key.pop_back();
 			//case "building *" * at the final pos is the same as searching "building" alone
 			if (key.back() == '*') {
 				key.pop_back();
@@ -70,12 +70,18 @@ void checkOperator(string query,unordered_map<string,Trie> data, unordered_map<s
 
 			wildCardOperator(start, ast, key, imap);
 		}
+		else if (tmp.find("..") != string::npos) {
+			rangeOperator(imap, tmp);
+		}
 		else if (tmp[0] == '~') {
 			string key = tmp.substr(1);
 
 			Synonyms_Search(key, imap, tableKey, synonyms);
 		}
 		else {// '$' '#' ' '
+			if (tmp[0] == '+') { //+
+				tmp = tmp.substr(1);
+			}
 			andOperator(tmp, imap);
 		}
 
