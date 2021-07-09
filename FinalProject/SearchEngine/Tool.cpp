@@ -1,5 +1,6 @@
 #include"Tool.h"
-
+#include<stdio.h>
+#include<conio.h>
 using namespace std;
 
 int get_index(char key){
@@ -63,4 +64,8 @@ int binarySearch(int x, vector<int> a, int l, int r) {
     else {
         return -1;
     }
+}
+
+void TextColor(int color) {
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }

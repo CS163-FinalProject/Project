@@ -7,6 +7,7 @@
 #include<unordered_map>
 #include<vector>
 #include<iostream>
+#include<random>
 
 struct cmp {
     bool operator()(pair<string, Trie> one, pair<string, Trie> other) {

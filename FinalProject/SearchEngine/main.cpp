@@ -84,8 +84,8 @@ int main(){
                 cout << line[i] << " ";
             }
             cout << endl;
-            cout << line.size();
-            OuputResult(imap, line); cout << endl;*/
+            cout << line.size();*/
+            OuputResult(imap, line); cout << endl;
             cout << "------------------------------------------------------------------" << endl;
         }
         else {

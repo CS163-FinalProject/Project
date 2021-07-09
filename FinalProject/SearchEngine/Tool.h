@@ -4,7 +4,12 @@
 #include<iostream>
 #include<vector>
 #include<unordered_map>
+#include <windows.h>
+#include<stdio.h>
+#include<conio.h>
 using namespace std;
+
+void TextColor(int color);
 
 int get_index(char key);
 
