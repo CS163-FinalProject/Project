@@ -76,12 +76,12 @@ int main(){
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
             checkOperator(line, query, data, imap, omap , tableKey, synonyms);
-            //Synonyms_Search(query, imap, omap, tableKey, synonyms);
-            for (int i = 0; i < line.size(); i++) {
+           
+           /* for (int i = 0; i < line.size(); i++) {
                 cout << line[i] << " ";
             }
-            cout << endl;
-            OuputResult(imap); cout << endl;
+            cout << endl;*/
+            OuputResult(imap, line); cout << endl;
             cout << "------------------------------------------------------------------" << endl;
         }
         else {

@@ -20,7 +20,7 @@ void InputFile(string filename, unordered_map<string, Trie>& data);
 
 void InputListFile(string filename, unordered_map<string, Trie> &data);
 
-void OuputResult(unordered_map<string, Trie> data);
+void OuputResult(unordered_map<string, Trie> data, vector<string> line);
 
 void destructor(unordered_map<string, Trie>& data);
 

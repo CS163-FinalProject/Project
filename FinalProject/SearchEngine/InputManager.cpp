@@ -67,19 +67,52 @@ void InputListFile(string filename, unordered_map<string, Trie> &data){
 
 }
 
-void OpenFile(string key) {
+void Preview(string key, vector<string> line) {
     string folder = "dataset\\";
     string filename = folder + key;
 
     ifstream fin;
     fin.open(filename);
 
+    string tmp;
+    if (fin.is_open()) {
+        getline(fin, tmp);
+
+    }
+    else {
+        cout << "Cant open file";
+    }
+    fin.close();
+}
+
+void OpenFile(string key, vector<string> line) {
+    string folder = "dataset\\";
+    string filename = folder + key;
+
+    ifstream fin;
+    fin.open(filename);
+
+    string tmp;
+    if (fin.is_open()) {
+        getline(fin, tmp);
+        
+        for (int i = 0; i < line.size(); i++) {
+            if (tmp.find(line[i]) != string::npos) {
+                int pos = tmp.find(line[i]);
+                string highlight = tmp.substr(pos, pos + line[i].size());
+
+            }
+        }
+    }
+    else {
+        cout << "Cant open file";
+    }
 
 
     fin.close();
 }
 
-void OuputResult(unordered_map<string, Trie> data) {
+void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
     
     priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> pq;
     priority_queue<pair<string, Trie>, vector<pair<string, Trie>>, cmp> tmpq;
@@ -97,7 +130,8 @@ void OuputResult(unordered_map<string, Trie> data) {
         cout << "You choose mode (1,2,3): ";  cin >> choice;
 
         if (choice == 1) {
-            cout << "\n-Top 5 results: \n" << endl;
+            cout << "\n-Top 5 results:" << endl;
+            cout << "------------------------------------------------------------------" << endl;
             while (!tmpq.empty() && n != 6) {
                 cout << "[" << n << "] " << tmpq.top().first << endl;
                 tmpq.pop();
@@ -106,12 +140,13 @@ void OuputResult(unordered_map<string, Trie> data) {
             cout << "------------------------------------------------------------------" << endl;
         }
         else if (choice == 2) {
-            cout << "\n-All results: \n" << endl;
+            cout << "\n-All results:" << endl;
+            cout << "------------------------------------------------------------------" << endl;
             while (!tmpq.empty()) {
                 cout << "[" << n << "] " << tmpq.top().first;
                 tmpq.pop();
                 if (!tmpq.empty()) {
-                    cout << '\t' << '\t' << "[" << n + 1 << "] " << tmpq.top().first << endl;
+                    cout << '\t' << '\t' << '\t' << '\t' << '\t' << "[" << n + 1 << "] " << tmpq.top().first << endl;
                     tmpq.pop();
                 }
                 else {
