@@ -87,58 +87,62 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
         }
     }
 
-    sort(highlight.begin(), highlight.end());
-    //cout << highlight[0];
-    int cnt = 1; bool isNote = false; string preview = ""; int preview_cnt = 0;
-    int stop_point = highlight[0] - 1;
-    
-    if (fin.is_open()) {
-        while (!fin.eof()) {
-            getline(fin, tmp);
-            stringstream ss(tmp);
-            while (ss >> word) {
-                
-                if (cnt == stop_point) {
-                    //cout << word;
-                    isNote = true;
-                }
-                
-                if (isNote) {
-                    preview += (word + " ");
-                    ++preview_cnt;
-                }
+    if (highlight.size() != 0) {
+        sort(highlight.begin(), highlight.end());
+        //cout << highlight[0];
+        int cnt = 1; bool isNote = false; string preview = ""; int preview_cnt = 0;
+        int stop_point = highlight[0] - 1;
 
+        if (fin.is_open()) {
+            while (!fin.eof()) {
+                getline(fin, tmp);
+                stringstream ss(tmp);
+                while (ss >> word) {
+
+                    if (cnt == stop_point) {
+                        //cout << word;
+                        isNote = true;
+                    }
+
+                    if (isNote) {
+                        preview += (word + " ");
+                        ++preview_cnt;
+                    }
+
+                    if (preview_cnt >= 100) {
+                        break;
+                    }
+                    ++cnt;
+                }
                 if (preview_cnt >= 100) {
                     break;
                 }
-                ++cnt;
-            }
-            if (preview_cnt >= 100) {
-                break;
-            }
-            
-        }
-    }fin.close();
 
-    int i = 0;
-    stringstream sss(preview); cout << "..";
-    while (sss >> word) {
-        bool hl = false;
-        for (int i = 0; i < line.size(); i++) {
-            if (word == line[i] || word == (line[i] + ":") || word == (line[i] + ",") || word == (line[i] + ".") || word == (line[i] + "!")) {
-                hl = true;
             }
-        }
-        if (hl) {
-            TextColor(11);
-            cout << word << " ";
-        }
-        else {
-            TextColor(7);               
-            cout << word << " ";
-        }
-    }cout << ".." << endl;
+        }fin.close();
 
+        int i = 0;
+        stringstream sss(preview); cout << "..";
+        while (sss >> word) {
+            bool hl = false;
+            for (int i = 0; i < line.size(); i++) {
+                if (word == line[i] || word == (line[i] + ":") || word == (line[i] + ",") || word == (line[i] + ".") || word == (line[i] + "!")) {
+                    hl = true;
+                }
+            }
+            if (hl) {
+                TextColor(11);
+                cout << word << " ";
+            }
+            else {
+                TextColor(7);
+                cout << word << " ";
+            }
+        }cout << ".." << endl;
+    }
+    else {
+        cout << "....\n";
+    }
 
 
 
@@ -168,7 +172,6 @@ void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
             while (!tmpq.empty() && n != 6) {
                 cout << "[" << n << "] " << tmpq.top().first << endl;
                 OpenFile(tmpq.top().first, data, line);
-                cout << endl;
                 tmpq.pop();
                 n++;
             }
