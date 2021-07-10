@@ -89,7 +89,7 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
 
     if (highlight.size() != 0) {
         sort(highlight.begin(), highlight.end());
-        //cout << highlight[0];
+        
         int cnt = 1; bool isNote = false; string preview = ""; int preview_cnt = 0;
         int stop_point = highlight[0] - 1;
 
