@@ -78,13 +78,11 @@ int main(){
             vector<string> line;
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
+
+            query = checkStopWord(query, dataStopwords);
             checkOperator(line, query, data, imap, omap , tableKey, synonyms);
            
-            /*for (int i = 0; i < line.size(); i++) {
-                cout << line[i] << " ";
-            }
-            cout << endl;
-            cout << line.size();*/
+            
             OuputResult(imap, line); cout << endl;
             cout << "------------------------------------------------------------------" << endl;
         }

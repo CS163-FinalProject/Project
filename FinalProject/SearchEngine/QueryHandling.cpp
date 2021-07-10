@@ -32,6 +32,7 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 		}
 		else if (get == "intitle:") { //intitle:
 			string key = tmp.substr(8);
+			line.push_back(key);
 			inTitle_Search(imap, key);
 		}
 		else if (tmp[0] == '-') { //exclude "-"
@@ -47,14 +48,14 @@ void checkOperator(vector<string> &line,string query,unordered_map<string,Trie> 
 			string key = "";
 
 			//case "* building" * at the first pos is the same as searching "building" alone
-			if (tmp.substr(1) != "*") {
+			if (tmp.size() != 1 && tmp.substr(1) != "*") {
 				key += tmp.substr(1);
 				if (key.back() == '"') key.pop_back();
 				line.push_back(key);
 				++pos;
 			}
 			//get word in between "tallest * building"
-			while (tmp != ""  && tmp.back() != '"') {
+			while (tmp != "" && tmp.back() != '"') {
 				ss >> tmp;
 				if (tmp == "*") {
 					if(start == -1) start = pos;
@@ -294,6 +295,68 @@ void rangeOperator(unordered_map<string, Trie>& imap, string key, vector<string>
 	imap = tmpmap;
 }
 
+string checkStopWord(string query, Trie dataStopWord) {
+	stringstream ss(query);
+	string tmp; string n_query = "";
+	vector<string> str;
+	while (ss >> tmp) {
+		if (tmp == "AND" || tmp == "OR") {
+			str.push_back(tmp);
+			continue;
+		}
+
+		if (tmp[0] == '"') {
+			if (searchWord(dataStopWord.root, tmp.substr(1), false)) {
+				str.push_back("\"1");
+				continue;
+			}
+		}
+		if (tmp.back() == '"') {
+			string key = tmp;
+			key.pop_back();
+			if (searchWord(dataStopWord.root, key, false)) {
+				str.push_back("\"");
+				continue;
+			}
+		}
+
+		if (tmp.substr(0,8) == "intitle:") {
+			if (searchWord(dataStopWord.root, tmp.substr(8), false)) {
+				continue;
+			}
+		}
+
+		if (tmp[0] == '-') {
+			if (searchWord(dataStopWord.root, tmp.substr(1), false)) {
+				continue;
+			}
+		}
+
+		if (searchWord(dataStopWord.root, tmp, false)) {
+			continue;
+		}
+		str.push_back(tmp);
+	}
+	int beg = 0; int end = str.size() - 1;
+	
+	while (beg < str.size() && (str[beg] == "AND" || str[beg] == "OR") ) {
+		beg++;
+	}
+	
+	while (end >= 0 && (str[end] == "AND" || str[end] == "OR") ) {
+		end--;
+	}
+	if (beg <= end) {
+		for (int i = beg; i <= end; i++) {
+			if (str[i] == "\"1") {
+				n_query += "\"";
+			}
+			else
+				n_query += (str[i] + " ");
+		}
+	}
+	return n_query;
+}
 
 //Use searchWord(dataStopwords.root, key, false); to check the StopWords to remove
 //Move it to checkOperator before check AND, OR...

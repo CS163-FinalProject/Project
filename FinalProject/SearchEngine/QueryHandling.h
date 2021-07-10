@@ -14,7 +14,7 @@
 
 using namespace std;
 
-
+string checkStopWord(string query, Trie dataStopWord);
 
 void wildCardOperator(int start, int ast, string key, unordered_map<string, Trie>& imap);
 
