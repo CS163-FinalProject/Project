@@ -138,10 +138,10 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
                 TextColor(7);
                 cout << word << " ";
             }
-        }cout << ".." << endl;
+        }cout << "..\n" << endl;
     }
     else {
-        cout << "....\n";
+        cout << "....\n" << endl;
     }
 
 
