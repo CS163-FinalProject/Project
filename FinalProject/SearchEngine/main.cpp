@@ -12,6 +12,7 @@
 #include<algorithm>
 #include<sstream>
 #include<time.h>
+#include<stack>
 #include<stdlib.h>
 #include<iterator>
 
@@ -36,10 +37,13 @@ int main(){
     Trie dataStopwords;
     inputStopwordsFile("stopwords_list_Shorter.txt", dataStopwords);
 
+    stack<string> stk;
+    InputHistory(stk); stk.pop();
+
     end = clock();
 
-    data["053.txt"].score = 0;
-    data["Data8.txt"].score = 1;
+    //data["053.txt"].score = 0;
+    //data["Data8.txt"].score = 1;
     cout << "Completed in " << (end - begin) / CLOCKS_PER_SEC << " s." << endl;
 
    
@@ -68,18 +72,39 @@ int main(){
             cout << "[10] (hashtag)    #_                     (FINISHED)" << endl;
             cout << "[11] (range)      50..100                (FINISHED)" << endl;
             cout << "[12] (synonym)    ~_                     (FINISHED)" << endl;
-
-            cout << "\nPlease input to find: ";
-
-            string query = "";
-            getline(cin, query); cout << endl;
+            string query = "chk";
             
+            
+            cout << "\nCheck history (chk) or Input query to search: ";
+
+
+            getline(cin, query); cout << endl;
+
+            if (query == "chk") {
+                    int n = 1;
+                    stack<string> qtmp;
+                    cout << "Query history: " << endl;
+                    while (!stk.empty() && n < 6) {
+                        cout << "[" << n << "] " << stk.top() << endl;
+                        qtmp.push(stk.top());
+                        stk.pop();
+                        ++n;
+                    }
+                    while (!qtmp.empty()) {
+                        stk.push(qtmp.top());
+                        qtmp.pop();
+                    }
+                    cout << "\nInput query to search: ";
+                    getline(cin, query); cout << endl;
+             }
+
             unordered_map<string, Trie> map1, map2;
             vector<string> line;
             unordered_map<string, Trie> imap = data;
             unordered_map<string, Trie> omap;
 
             query = checkStopWord(query, dataStopwords);
+            AddHistory(query, stk);
             checkOperator(line, query, data, imap, omap , tableKey, synonyms);
            
             

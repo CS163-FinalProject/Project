@@ -6,6 +6,7 @@
 #include<string>
 #include<unordered_map>
 #include<vector>
+#include<stack>
 #include<iostream>
 #include<random>
 
@@ -30,5 +31,9 @@ void destructor(unordered_map<string, Trie>& data);
 void InputSynonymsFile(unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms);
 
 void inputStopwordsFile(string filename, Trie& dataStopwords);
+
+void InputHistory(stack<string>& stk);
+
+void AddHistory(string query, stack<string>& stk);
 
 #endif

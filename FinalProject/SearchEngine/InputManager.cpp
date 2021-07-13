@@ -8,6 +8,7 @@
 #include<unordered_map>
 #include<iostream>
 #include<algorithm>
+#include<stack>
 #include<sstream>
 #include<random>
 #include<queue>
@@ -125,8 +126,9 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
         stringstream sss(preview); cout << "..";
         while (sss >> word) {
             bool hl = false;
+            string tmp = WordFilter(word);
             for (int i = 0; i < line.size(); i++) {
-                if (word == line[i] || word == (line[i] + ":") || word == (line[i] + ",") || word == (line[i] + ".") || word == (line[i] + "!")) {
+                if (line[i] == tmp) {
                     hl = true;
                 }
             }
@@ -143,11 +145,9 @@ void OpenFile(string key, unordered_map<string,Trie> data,  vector<string> line)
     else {
         cout << "....\n" << endl;
     }
-
-
-
-    
 }
+
+
 
 void OuputResult(unordered_map<string, Trie> data, vector<string> line) {
     
@@ -255,4 +255,26 @@ void inputStopwordsFile(string filename, Trie& dataStopwords)
     else cout << "Can't open file !\n";
 
     fin.close();
+}
+
+void InputHistory(stack<string> &stk) {
+    ifstream fin;
+    string tmp;
+    fin.open("History.txt");
+    if (fin.is_open()) {
+        while (!fin.eof()) {
+            getline(fin, tmp);
+            stk.push(tmp);
+        }
+    }
+    fin.close();
+}
+
+void AddHistory(string query, stack<string>& stk) {
+    ofstream fout;
+    string tmp;
+    fout.open("History.txt", ios::app);
+    fout << query << endl;
+    fout.close();
+    stk.push(query);
 }

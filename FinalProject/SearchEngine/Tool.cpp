@@ -69,3 +69,19 @@ int binarySearch(int x, vector<int> a, int l, int r) {
 void TextColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
+
+string WordFilter(string word) {
+    string tmp;
+    for (int i = 0; i < word.length(); i++) {
+        if ('A' <= word[i] && word[i] <= 'Z') {
+            tmp += (word[i] + 32);
+        }
+        else if (33 <= word[i] && word[i] <= 47) {
+            continue;
+        }
+        else {
+            tmp += word[i];
+        }
+    }
+    return tmp;
+}
