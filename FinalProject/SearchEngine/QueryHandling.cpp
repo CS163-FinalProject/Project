@@ -272,7 +272,7 @@ void rangeOperator(unordered_map<string, Trie>& imap, string key, vector<string>
 		dollar = true;
 		from = atoi(key.substr(1).c_str());
 	}
-
+	
 	string tmp;
 	if (!dollar) tmp = key.substr(key.find('.') + 2);	//100
 	else tmp = key.substr(key.find('.') + 3);
