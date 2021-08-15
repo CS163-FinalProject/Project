@@ -115,6 +115,7 @@ void andOperator(string key, unordered_map<string, Trie> &imap) {
 
 void filetypeOperator(unordered_map<string, Trie>& imap, string key) {
 	unordered_map<string, Trie> tmpmap;
+
 	for (auto itr : imap) {
 		string title = itr.first;
 		string type = title.substr(title.find(".") + 1);
@@ -143,6 +144,7 @@ void inTitle_Search(unordered_map<string, Trie>& imap, string key) {
 
 void minus_Search(unordered_map<string, Trie>& imap, string key) {
 	unordered_map<string, Trie> tmpmap;
+
 	for (auto itr : imap) {
 		if (!searchWord(itr.second.root, key, false)) {
 			tmpmap.insert(make_pair(itr.first, itr.second));
