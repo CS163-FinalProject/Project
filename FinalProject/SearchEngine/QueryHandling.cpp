@@ -118,9 +118,9 @@ void filetypeOperator(unordered_map<string, Trie>& imap, string key) {
 	for (auto itr : imap) {
 		string title = itr.first;
 		string type = title.substr(title.find(".") + 1);
-		if (type == key) {
+		if (type == key)
 			tmpmap.insert(make_pair(itr.first, itr.second));
-		}
+		
 	}
 
 	imap.clear();
