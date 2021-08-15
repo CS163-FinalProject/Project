@@ -304,7 +304,7 @@ string checkStopWord(string query, Trie dataStopWord) {
 			str.push_back(tmp);
 			continue;
 		}
-
+		
 		if (tmp[0] == '"') {
 			if (searchWord(dataStopWord.root, tmp.substr(1), false)) {
 				str.push_back("\"1");
