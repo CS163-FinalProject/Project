@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int main(){
+int main() {
     clock_t begin, end;
     cout << "Building..." << endl;
     begin = clock();
