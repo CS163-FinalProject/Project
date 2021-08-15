@@ -152,7 +152,6 @@ void minus_Search(unordered_map<string, Trie>& imap, string key) {
 	imap.clear();
 	imap = tmpmap;
 	tmpmap.clear();
-
 }
 
 
