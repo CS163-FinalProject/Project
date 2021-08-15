@@ -238,8 +238,10 @@ void wildCardOperator(int start, int ast, string key, unordered_map<string, Trie
 }
 
 void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_map<string, int>& tableKey, unordered_multimap<int, string>& synonyms, vector<string> &line) {
+	
 	//umit is unordered_multimap iterator
 	//equal_range return the begin and end iterators for the synonyms list
+	
 	pair<umit, umit> itr = synonyms.equal_range(tableKey[key]);
 	umit i = itr.first;
 	unordered_map<string, Trie> tmpmap;

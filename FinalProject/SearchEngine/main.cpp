@@ -30,8 +30,11 @@ int main() {
     //Each word will have a special value stored in tableKey that use for search.
     //Synonyms words have the same value.
     //That value will be assign to list of synonyms words in the multimap.
-    unordered_map<string, int> tableKey;  
+    //Double-hash table
+    unordered_map<string, int> tableKey;
+    
     unordered_multimap<int, string> synonyms;
+
     InputSynonymsFile(tableKey, synonyms);
 
     Trie dataStopwords;
