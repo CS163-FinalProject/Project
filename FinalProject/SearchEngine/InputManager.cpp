@@ -252,7 +252,7 @@ void inputStopwordsFile(string filename, Trie& dataStopwords)
             ++place;
         }
     }
-    else cout << "Can't open file !\n";
+    else cout << "Cant open file !\n";
 
     fin.close();
 }
