@@ -241,10 +241,12 @@ void Synonyms_Search(string key, unordered_map<string, Trie>& imap, unordered_ma
 	
 	//umit is unordered_multimap iterator
 	//equal_range return the begin and end iterators for the synonyms list
-	
+	// it will return the pointers for the synonym list
 	pair<umit, umit> itr = synonyms.equal_range(tableKey[key]);
 	umit i = itr.first;
 	unordered_map<string, Trie> tmpmap;
+
+	//Traverse through the synonym list
 	while (i != itr.second) {
 		string synonym_word = i->second;
 		line.push_back(synonym_word);
