@@ -119,7 +119,6 @@ int main() {
     }
     cout << "Thank you for using!!!" << endl;
 
-    
 
     tableKey.clear();
     synonyms.clear();
