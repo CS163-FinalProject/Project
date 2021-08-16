@@ -15,12 +15,3 @@ helen
 0 
 helen 
 high 
-hello
-abc
-coffee
-tea
-flower
-rose
-blue
-red
-green
